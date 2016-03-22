@@ -6,21 +6,23 @@ defmodule ElixirMicroservice.Mixfile do
      version: "0.0.1",
      elixir: "~> 1.2",
     #  escript: [main_module: Microservice],
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
+     build_embedded: Mix.env == :dev,
+     start_permanent: Mix.env == :dev,
      deps: deps]
   end
 
   def application do
     [mod: {ElixirMicroservice.Core, []},
-      applications: [:cowboy, :plug, :poison]]
+      applications: [:cowboy, :plug, :poison, :poolboy, :redix]]
   end
 
   defp deps do
     [
       {:cowboy, "~> 1.0.0"},
       {:plug, "~> 1.0"},
-      {:poison, "~> 2.0"}
+      {:poison, "~> 2.0"},
+      {:redix, ">= 0.0.0"},
+      {:poolboy, "~> 1.5" }
     ]
   end
 end
