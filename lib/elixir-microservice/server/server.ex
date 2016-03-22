@@ -3,9 +3,9 @@ defmodule ElixirMicroservice.Server.Server do
   alias ElixirMicroservice.Server.Router, as: Router
   use GenServer
 
-  def start_link(state, opts \\ []) do
+  def start_link() do
     IO.puts "--> starting the server"
-    AppStatus.updateState("haha")
+    AppStatus.updateState(%{server: :ok})
     Plug.Adapters.Cowboy.http(Router, [], port: 8080)
   end
 end

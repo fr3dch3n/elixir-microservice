@@ -1,32 +1,57 @@
 defmodule ElixirMicroservice.Server.Router do
-  alias ElixirMicroservice.AppStatus, as: AppStatus
-  import Plug.Conn
-  use Plug.Router
+  alias ElixirMicroservice.AppStatus
+  alias ElixirMicroservice.Server.RouterHelper
+  alias ElixirMicroservice.RedixPool
+  require EEx
 
-  plug :match
-  plug :dispatch
-
-
-  @userid   "uid"
-  @password "pwd"
-
-  get "/" do
-    conn = fetch_query_params(conn, []) # populates conn.params
-    %{ @userid => usr, @password => pass } = conn.params
-    send_resp(conn, 200, "Hello #{usr}. Your password is #{pass}")
+  def init(default_opts) do
+    IO.puts "--> starting the router"
+    default_opts
+  end
+  def call(conn, _opts) do
+    route(conn.method, conn.path_info, conn)
   end
 
-  get "/hello" do
-    send_resp(conn, 200, "wooifjeoorld")
+  defmodule RedisRouter do
+    use RouterHelper
+    EEx.function_from_file :defp, :template_add, "templates/redis/add.eex", [:user_id]
+    EEx.function_from_file :defp, :template_all, "templates/redis/all.eex", [:content]
+    EEx.function_from_file :defp, :template_show_user, "templates/redis/show_user.eex", [:user_id, :content]
+
+    def route("GET", ["redis", "add", user_id], conn) do
+      RedixPool.command(~w(INCR #{user_id}))
+      page_contents = template_add(user_id)
+      conn |> Plug.Conn.put_resp_content_type("text/html") |> Plug.Conn.send_resp(200, page_contents)
+    end
+
+    def route("GET", ["redis", "all"], conn) do
+      {_, content} = RedixPool.command(~w(KEYS *))
+      page_contents = template_all(content)
+      Enum.map(content, fn x -> IO.puts x end) 
+      conn |> Plug.Conn.put_resp_content_type("text/html") |> Plug.Conn.send_resp(200, page_contents)
+    end
+    def route("GET", ["redis", user_id], conn) do
+      {_, content} = RedixPool.command(~w(GET #{user_id}))
+      page_contents = template_show_user(user_id, content)
+      conn |> Plug.Conn.put_resp_content_type("text/html") |> Plug.Conn.send_resp(200, page_contents)
+    end
+
+    def route(_method, _path, conn) do
+      conn |> Plug.Conn.send_resp(404, "Couldn't find that user page, sorry!")
+    end
   end
 
-  get "/status" do
-    send_resp(conn, 200, AppStatus.getJsonState())
-  end
 
-  #forward "/users", to: UsersRouter
+  @user_router_options RedisRouter.init([])
+  def route("GET", ["redis" | _], conn) do
+   RedisRouter.call(conn, @user_router_options)
+ end
+ def route("GET", ["status"], conn) do
+    conn |> Plug.Conn.send_resp(200, AppStatus.getJsonState)
+ end
 
-  match _ do
-    send_resp(conn, 404, "oops")
-  end
+ def route(_method, _path, conn) do
+   conn |> Plug.Conn.send_resp(404, "Couldn't find that page, sorry!")
+ end
+
 end

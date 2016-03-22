@@ -2,13 +2,17 @@ defmodule ElixirMicroservice.AppStatus do
 
   def start_link() do
     IO.puts "--> starting the app-status"
-    Agent.start_link(fn -> %{:status => :ok} end, name: __MODULE__)
+    conf = Application.get_all_env :microservice
+    Agent.start_link(fn ->
+    %{
+    conf: "conf",
+    status: :ok,
+    statusDetail: %{}
+    } end, name: __MODULE__)
   end
 
   def updateState(state) do
-    newStatus = %{:status => :ok, :server => :ok}
-    # state mergen und/oder updaten
-    Agent.update(__MODULE__, fn(_n) -> newStatus end)
+    Agent.update(__MODULE__, fn(n) -> Map.update!(n, :statusDetail, &(Map.merge(&1, state))) end)
   end
 
   def getStatus() do
