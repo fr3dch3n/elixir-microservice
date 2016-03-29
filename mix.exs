@@ -13,7 +13,7 @@ defmodule ElixirMicroservice.Mixfile do
 
   def application do
     [mod: {ElixirMicroservice.Core, []},
-      applications: [:cowboy, :plug, :poison, :poolboy, :redix]]
+      applications: [:cowboy, :plug, :poison, :poolboy, :redix, :kafka_ex]]
   end
 
   defp deps do
@@ -22,7 +22,8 @@ defmodule ElixirMicroservice.Mixfile do
       {:plug, "~> 1.0"},
       {:poison, "~> 2.0"},
       {:redix, ">= 0.0.0"},
-      {:poolboy, "~> 1.5" }
+      {:poolboy, "~> 1.5" },
+      {:kafka_ex, "~> 0.5.0"}
     ]
   end
 end

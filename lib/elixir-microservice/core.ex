@@ -2,7 +2,7 @@ defmodule ElixirMicroservice.Core do
   alias ElixirMicroservice.AppStatus
   alias ElixirMicroservice.Server.Server
   alias ElixirMicroservice.RedixPool
-  alias ElixirMicroservice.Parallel.Par_Supervisor
+  alias ElixirMicroservice.Kafka
   use Application
   use Supervisor
 
@@ -15,7 +15,7 @@ defmodule ElixirMicroservice.Core do
         worker(AppStatus, []),
         worker(RedixPool, []),
         worker(Server, []),
-        worker(Par_Supervisor, [])
+        supervisor(Kafka, [])
       ]
 
       supervise(children, strategy: :one_for_one)

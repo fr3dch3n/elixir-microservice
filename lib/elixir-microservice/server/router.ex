@@ -27,9 +27,10 @@ defmodule ElixirMicroservice.Server.Router do
     def route("GET", ["redis", "all"], conn) do
       {_, content} = RedixPool.command(~w(KEYS *))
       page_contents = template_all(content)
-      Enum.map(content, fn x -> IO.puts x end) 
+      Enum.map(content, fn x -> IO.puts x end)
       conn |> Plug.Conn.put_resp_content_type("text/html") |> Plug.Conn.send_resp(200, page_contents)
     end
+
     def route("GET", ["redis", user_id], conn) do
       {_, content} = RedixPool.command(~w(GET #{user_id}))
       page_contents = template_show_user(user_id, content)
