@@ -1,7 +1,0 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <h1>Redis Information Page</h1>
-    <p>The value of the user <%= user_id %> was just increased.</p>
-  </body>
-</html>
