@@ -1,9 +1,0 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <h1>Redis Information Page</h1>
-    <p> There are <%= Enum.count(content) %> ids in the redis.</p>
-    <p> <%= Enum.map(content, fn x -> x <> "</br>" end) %></p>
-
-  </body>
-</html>
