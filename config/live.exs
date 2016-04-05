@@ -1,8 +1,8 @@
 use Mix.Config
 
 config :microservice,
-  port: 4000
+  port: 8080
 
   config :logger,
-    level: :debug,
+    level: :info,
     truncate: 4096
