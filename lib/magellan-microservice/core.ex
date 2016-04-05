@@ -3,6 +3,7 @@ defmodule ElixirMicroservice.Core do
   alias ElixirMicroservice.Server.Server
   use Application
   use Supervisor
+  require Logger
 
   def start_link do
       Supervisor.start_link(__MODULE__, [])
@@ -18,7 +19,7 @@ defmodule ElixirMicroservice.Core do
     end
 
   def start(_type, _args) do
-      IO.puts "--> starting the microservice"
+      Logger.info "--> starting the microservice"
       start_link()
     end
 end

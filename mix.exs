@@ -13,7 +13,7 @@ defmodule ElixirMicroservice.Mixfile do
 
   def application do
     [mod: {ElixirMicroservice.Core, []},
-      applications: [:cowboy, :plug, :poison]]
+      applications: [:cowboy, :plug, :poison, :logger]]
   end
 
   defp deps do

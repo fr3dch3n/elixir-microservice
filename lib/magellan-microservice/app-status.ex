@@ -1,7 +1,8 @@
 defmodule ElixirMicroservice.AppStatus do
+  require Logger
 
   def start_link() do
-    IO.puts "--> starting the app-status"
+    Logger.info "--> starting the app-status"
     conf = Application.get_all_env :microservice
     Agent.start_link(fn ->
     %{
