@@ -1,9 +1,9 @@
-defmodule ElixirMicroservice.Core do
-  alias ElixirMicroservice.AppStatus
-  alias ElixirMicroservice.Server.Server
+defmodule MagellanMicroservice.Core do
+  alias MagellanMicroservice.AppStatus
+  alias MagellanMicroservice.Server.Server
+  require Logger
   use Application
   use Supervisor
-  require Logger
 
   def start_link do
       Supervisor.start_link(__MODULE__, [])
@@ -19,7 +19,7 @@ defmodule ElixirMicroservice.Core do
     end
 
   def start(_type, _args) do
-      Logger.info "--> starting the microservice"
+      Logger.info "--> starting the magellan-microservice"
       start_link()
     end
 end

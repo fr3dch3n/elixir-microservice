@@ -1,4 +1,4 @@
-defmodule ElixirMicroservice.Mixfile do
+defmodule MagellanMicroservice.Mixfile do
   use Mix.Project
 
   def project do
@@ -12,7 +12,7 @@ defmodule ElixirMicroservice.Mixfile do
   end
 
   def application do
-    [mod: {ElixirMicroservice.Core, []},
+    [mod: {MagellanMicroservice.Core, []},
       applications: [:cowboy, :plug, :poison, :logger]]
   end
 

@@ -1,8 +1,8 @@
-defmodule ElixirMicroservice.AppStatus do
+defmodule MagellanMicroservice.AppStatus do
   require Logger
 
   def start_link() do
-    Logger.info "--> starting the app-status"
+    Logger.info "--> starting the magellan-app-status"
     conf = Application.get_all_env :microservice
     Agent.start_link(fn ->
     %{
@@ -22,5 +22,9 @@ defmodule ElixirMicroservice.AppStatus do
 
   def getJsonState() do
     Poison.Encoder.encode(getStatus, [])
+  end
+
+  def getHealth() do
+    "OK"
   end
 end

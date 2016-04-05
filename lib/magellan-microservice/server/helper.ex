@@ -1,4 +1,4 @@
-defmodule ElixirMicroservice.Server.RouterHelper do
+defmodule MagellanMicroservice.Server.RouterHelper do
   defmacro __using__(_opts) do
     quote do
       def init(options) do
