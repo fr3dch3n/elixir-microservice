@@ -5,19 +5,21 @@ defmodule MagellanMicroservice.AppStatus do
     Logger.info "--> starting the magellan-app-status"
     conf = Application.get_all_env :microservice
     Agent.start_link(fn ->
-    %{
-    conf: "conf",
-    status: :ok,
-    statusDetail: %{}
-    } end, name: __MODULE__)
+    %{}
+   end, name: __MODULE__)
   end
 
-  def updateState(state) do
-    Agent.update(__MODULE__, fn(n) -> Map.update!(n, :statusDetail, &(Map.merge(&1, state))) end)
+  def registerStatusFun(appName, fun) do
+    Agent.update(__MODULE__, fn(n) -> Map.put(n, appName, fun) end)
   end
 
   def getStatus() do
-    Agent.get(__MODULE__, fn(n) -> n end)
+    Agent.get(__MODULE__, fn(n) ->
+      %{
+        status: :ok,
+        statusDetails: Enum.reduce(n, %{},  fn({name, fun}, acc) -> Map.put(acc, name, fun.()) end)
+      }
+    end)
   end
 
   def getJsonState() do

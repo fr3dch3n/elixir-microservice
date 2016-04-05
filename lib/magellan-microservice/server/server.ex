@@ -8,15 +8,19 @@ defmodule MagellanMicroservice.Server.Server do
     try do
       Application.fetch_env!(:microservice, :port)
     rescue
-      e in ArgumentError ->
+      _ in ArgumentError ->
         Logger.warn("No port specified. Falling back to 8080.")
         8080
     end
   end
 
+  def status() do
+    %{status: :ok}
+  end
+
   def start_link() do
     Logger.info "--> starting the magellan-server"
-    AppStatus.updateState(%{server: :ok})
+    AppStatus.registerStatusFun(:server, &status/0)
     Plug.Adapters.Cowboy.http(Router, [], port: specify_port)
   end
 end

@@ -4,16 +4,20 @@ defmodule MagellanMicroservice.Server.Router do
   require Logger
   use Plug.Router
 
-
   plug :match
   plug :dispatch
 
+  def status() do
+    %{status: :ok}
+  end
+
   def init([]) do
     Logger.info("--> starting the magellan-router")
+    AppStatus.registerStatusFun(:router, &status/0)
     try do
       Application.fetch_env!(:microservice, :app_router)
     rescue
-      e in ArgumentError ->
+      _ in ArgumentError ->
         Logger.warn("No custom router specified.")
     end
   end
@@ -31,7 +35,7 @@ defmodule MagellanMicroservice.Server.Router do
   try do
     forward "/", to: Application.fetch_env!(:microservice, :app_router)
   rescue
-    e in ArgumentError ->
+    _ in ArgumentError ->
       Logger.warn("No custom router specified.")
   end
 
