@@ -1,19 +1,24 @@
 defmodule ElixirMicroservice.Server.Router do
+  use Plug.Router
   alias ElixirMicroservice.AppStatus
   alias ElixirMicroservice.Server.RouterHelper
+
   require EEx
 
-  def init(default_opts) do
-    IO.puts "--> starting the router"
-    default_opts
+  plug :match
+  plug :dispatch
+
+  def init([]) do
+    IO.puts "--> starting magellan-router"
   end
-  def call(conn, _opts) do
-    route(conn.method, conn.path_info, conn)
+
+  get "/health" do
+    send_resp(conn, 200, "OK")
   end
-  def route("GET", ["status"], conn) do
-   conn |> Plug.Conn.send_resp(200, AppStatus.getJsonState)
+
+  get "/status" do
+    send_resp(conn, 200, "status")
   end
-  def route(_method, _path, conn) do
-      conn |> Plug.Conn.send_resp(404, "Couldn't find that page, sorry!")
-  end
+
+  forward "/", to: Application.fetch_env!(:router, :app_router)
 end
