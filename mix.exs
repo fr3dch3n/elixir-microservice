@@ -2,7 +2,7 @@ defmodule MagellanMicroservice.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :microservice,
+    [app: :magellan_microservice,
      version: "0.0.1",
      elixir: "~> 1.2",
     #  escript: [main_module: Microservice],

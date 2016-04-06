@@ -15,7 +15,7 @@ defmodule MagellanMicroservice.Server.Router do
     Logger.info("--> starting the magellan-router")
     AppStatus.registerStatusFun(:router, &status/0)
     try do
-      Application.fetch_env!(:microservice, :app_router)
+      Application.fetch_env!(:magellan_microservice, :app_router)
     rescue
       _ in ArgumentError ->
         Logger.warn("No custom router specified.")
@@ -33,7 +33,8 @@ defmodule MagellanMicroservice.Server.Router do
   #TODO: prettystatus with eex
 
   try do
-    forward "/", to: Application.fetch_env!(:microservice, :app_router)
+    IO.inspect Application.fetch_env!(:magellan_microservice, :app_router)
+    forward "/", to: Application.fetch_env!(:magellan_microservice, :app_router)
   rescue
     _ in ArgumentError ->
       Logger.warn("No custom router specified.")
