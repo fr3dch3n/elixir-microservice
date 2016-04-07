@@ -33,8 +33,10 @@ defmodule MagellanMicroservice.Server.Router do
   #TODO: prettystatus with eex
 
   try do
-    IO.inspect Application.fetch_env!(:magellan_microservice, :app_router)
+    Logger.warn "I found "
+    Logger.warn Application.fetch_env!(:magellan_microservice, :app_router)
     forward "/", to: Application.fetch_env!(:magellan_microservice, :app_router)
+    Logger.warn "forwarding"
   rescue
     _ in ArgumentError ->
       Logger.warn("No custom router specified.")
