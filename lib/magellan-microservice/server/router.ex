@@ -14,12 +14,19 @@ defmodule MagellanMicroservice.Server.Router do
   def init([]) do
     Logger.info("--> starting the magellan-router")
     AppStatus.registerStatusFun(:router, &status/0)
-    try do
-      Application.fetch_env!(:magellan_microservice, :app_router)
-    rescue
-      _ in ArgumentError ->
-        Logger.warn("No custom router specified.")
-    end
+    Agent.start_link(fn ->
+    []
+   end, name: __MODULE__)
+  end
+
+  def registerRouter(x) do
+    Agent.update(__MODULE__, fn(_n) -> x end)
+  end
+
+  def getStatus() do
+    Agent.get(__MODULE__, fn(n) ->
+      n
+    end)
   end
 
   get "/health" do
@@ -30,19 +37,13 @@ defmodule MagellanMicroservice.Server.Router do
     send_resp(conn, 200, AppStatus.getJsonState)
   end
 
-  #TODO: prettystatus with eex
-
-  try do
-    Logger.warn "I found "
-    Logger.warn Application.fetch_env!(:magellan_microservice, :app_router)
-    forward "/", to: Application.fetch_env!(:magellan_microservice, :app_router)
-    Logger.warn "forwarding"
-  rescue
-    _ in ArgumentError ->
-      Logger.warn("No custom router specified.")
-  end
-
   match _ do
-    send_resp(conn, 404, "Invalide URL because of no router defined.")
+    n = getStatus
+    if Enum.empty?(n) do
+      Logger.warn "No custom router defined!"
+      send_resp(conn, 404, "Invalide URL.")
+    else
+       n.call(conn, [])
+    end
   end
 end

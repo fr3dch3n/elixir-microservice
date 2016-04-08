@@ -3,7 +3,6 @@ defmodule MagellanMicroservice.AppStatus do
 
   def start_link() do
     Logger.info "--> starting the magellan-app-status"
-    conf = Application.get_all_env :microservice
     Agent.start_link(fn ->
     %{}
    end, name: __MODULE__)

@@ -1,7 +1,7 @@
 use Mix.Config
 
 config :magellan_microservice,
-  port: 8080
+  port: 8082
 
   config :logger,
     level: :info,

@@ -10,7 +10,7 @@ defmodule MagellanMicroservice.Server.Server do
     rescue
       _ in ArgumentError ->
         Logger.warn("No port specified. Falling back to 8080.")
-        8080
+        8081
     end
   end
 
