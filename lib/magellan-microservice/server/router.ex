@@ -23,7 +23,7 @@ defmodule MagellanMicroservice.Server.Router do
     Agent.update(__MODULE__, fn(_n) -> x end)
   end
 
-  def getStatus() do
+  def getRouter() do
     Agent.get(__MODULE__, fn(n) ->
       n
     end)
@@ -38,7 +38,7 @@ defmodule MagellanMicroservice.Server.Router do
   end
 
   match _ do
-    n = getStatus
+    n = getRouter
     if Enum.empty?(n) do
       Logger.warn "No custom router defined!"
       send_resp(conn, 404, "Invalide URL.")

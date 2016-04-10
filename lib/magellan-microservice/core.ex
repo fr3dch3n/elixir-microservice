@@ -11,6 +11,7 @@ defmodule MagellanMicroservice.Core do
 
   def init([]) do
       children = [
+        worker(MagellanMicroservice.Config, []),
         worker(AppStatus, []),
         worker(Server, [])
       ]
