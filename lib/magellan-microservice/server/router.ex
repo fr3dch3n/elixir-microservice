@@ -39,7 +39,7 @@ defmodule MagellanMicroservice.Server.Router do
 
   match _ do
     n = getRouter
-    if Enum.empty?(n) do
+    if !n do
       Logger.warn "No custom router defined!"
       send_resp(conn, 404, "Invalide URL.")
     else
