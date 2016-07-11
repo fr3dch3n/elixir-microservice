@@ -1,4 +1,4 @@
-defmodule MagellanMicroservice.Server.Router do
+defmodule MagellanMicroservice.Router do
   alias MagellanMicroservice.AppStatus
   require EEx
   require Logger

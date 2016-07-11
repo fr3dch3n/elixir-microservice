@@ -1,6 +1,6 @@
-defmodule MagellanMicroservice.Server.Server do
+defmodule MagellanMicroservice.Server do
   alias MagellanMicroservice.AppStatus, as: AppStatus
-  alias MagellanMicroservice.Server.Router, as: Router
+  alias MagellanMicroservice.Router, as: Router
   require Logger
   use GenServer
 

@@ -1,6 +1,6 @@
 defmodule MagellanMicroservice.Core do
   alias MagellanMicroservice.AppStatus
-  alias MagellanMicroservice.Server.Server
+  alias MagellanMicroservice.Server
   require Logger
   use Application
   use Supervisor
