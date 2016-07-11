@@ -5,7 +5,6 @@ defmodule MagellanMicroservice.Mixfile do
     [app: :magellan_microservice,
      version: "0.0.1",
      elixir: "~> 1.2",
-    #  escript: [main_module: Microservice],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]

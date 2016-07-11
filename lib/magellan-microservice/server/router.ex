@@ -25,7 +25,7 @@ defmodule MagellanMicroservice.Server.Router do
 
   def getRouter() do
     Agent.get(__MODULE__, fn(n) ->
-      n
+      n #validate and stuff, else :error
     end)
   end
 
@@ -38,8 +38,8 @@ defmodule MagellanMicroservice.Server.Router do
   end
 
   match _ do
-    n = getRouter
-    if !n do
+    n = getRouter # onle one router atm
+    if !List.first(n) do
       Logger.warn "No custom router defined!"
       send_resp(conn, 404, "Invalide URL.")
     else
