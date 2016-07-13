@@ -29,11 +29,11 @@ defmodule MagellanMicroservice.Router do
     end)
   end
 
-  get "/health" do
+  get Application.fetch_env!(:magellan_microservice, :health) do
     send_resp(conn, 200, AppStatus.getHealth)
   end
-
-  get "/status" do
+    
+  get Application.fetch_env!(:magellan_microservice, :status) do
     send_resp(conn, 200, AppStatus.getJsonState)
   end
 
