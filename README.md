@@ -1,20 +1,36 @@
-# Microservice
+# Magellan-Microservice
 
-**TODO: Add description**
+This is a simple Microservice written in Elixir.
+The Magellan-Microservice provides a basic app-status and health page.
+It also provides the possibility to plug in a custom router (see Examples).
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+Add the following line to your mix.exs deps:
+'{:magellan_microservice, git: "https://github.com/fr3dch3n/magellan-microservice", branch: :master, app: false}'
 
-  1. Add microservice to your list of dependencies in `mix.exs`:
+## Example
 
-        def deps do
-          [{:microservice, "~> 0.0.1"}]
-        end
+To start the Microserice, start it as a supervisor next to your app.
+'''
+def init([]) do
+  children = [
+    supervisor(MagellanMicroservice.Core, []),
+    supervisor(Example.Core, [])
+  ]
+  supervise(children, strategy: :one_for_one)
+end
+'''
 
-  2. Ensure microservice is started before your application:
+To use your custom plug-router, register it at start-up time.
+'''
+MagellanMicroservice.Router.register_router(Example.Router)
+'''
 
-        def application do
-          [applications: [:microservice]]
-        end
-
+The following configuration has to be provided.
+'''
+config :magellan_microservice,
+  status: "/status",
+  health: "/health",
+  port: 8080
+'''
