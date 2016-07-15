@@ -30,7 +30,7 @@ defmodule MagellanMicroservice.Router do
     Logger.info("--> starting the magellan-router")
     AppStatus.register_status_fun(:router, &status/0)
     Agent.start_link(fn ->
-    []
+    %{}
    end, name: __MODULE__)
   end
 
@@ -41,7 +41,8 @@ defmodule MagellanMicroservice.Router do
   """
   @spec register_router(any) :: any()
   def register_router(x) do
-    Agent.update(__MODULE__, fn(_n) -> x end)
+    Agent.update(__MODULE__, fn(_n) -> %{status: :ok,
+    router: x} end)
   end
 
   @spec get_router() :: any()
@@ -61,11 +62,11 @@ defmodule MagellanMicroservice.Router do
 
   match _ do
     n = get_router() # onle one router atm
-    if !List.first(n) do
+    if !Map.get(n, :status) == :ok do
       Logger.warn "No custom router defined!"
       send_resp(conn, 404, "Invalide URL.")
     else
-       n.call(conn, [])
+       Map.get(n, :router).call(conn, [])
     end
   end
 end
