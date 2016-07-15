@@ -7,7 +7,7 @@ defmodule MagellanMicroservice.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps()]
   end
 
   def application do
@@ -15,7 +15,7 @@ defmodule MagellanMicroservice.Mixfile do
       applications: [:cowboy, :plug, :poison, :logger]]
   end
 
-  defp deps do
+  def deps do
     [
       {:cowboy, "~> 1.0.0"},
       {:plug, "~> 1.0"},
