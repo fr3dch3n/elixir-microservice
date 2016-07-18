@@ -19,7 +19,7 @@ defmodule MagellanMicroservice.Router.Test do
   end
 
   test "no matching route should return 404" do
-    conn = Router.call(conn(:get, "/test/foobar"), @opts)
+    conn = Router.call(conn(:get, "/foobar"), @opts)
     assert conn.state == :sent
     assert conn.status == 404
   end

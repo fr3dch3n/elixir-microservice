@@ -62,11 +62,11 @@ defmodule MagellanMicroservice.Router do
 
   match _ do
     n = get_router() # onle one router atm
-    if !Map.get(n, :status) == :ok do
+    if Map.get(n, :status) == :ok do
+      Map.get(n, :router).call(conn, [])
+    else
       Logger.warn "No custom router defined!"
       send_resp(conn, 404, "Invalide URL.")
-    else
-       Map.get(n, :router).call(conn, [])
     end
   end
 end
