@@ -4,12 +4,14 @@
 
 This is a simple Microservice written in Elixir.
 The Magellan-Microservice provides a basic app-status and health page.
-It also provides the possibility to plug in a custom router (see Examples).
+It also provides the possibility to plug in a custom router.
 
 ## Installation
 
 Add the following line to your mix.exs deps:
-```{:magellan_microservice, git: "https://github.com/fr3dch3n/magellan-microservice", branch: :master, app: false}```
+```
+{:magellan_microservice, git: "https://github.com/fr3dch3n/magellan-microservice", branch: :master, app: false}
+```
 
 ## Example
 
