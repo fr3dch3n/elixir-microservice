@@ -1,5 +1,7 @@
 # Magellan-Microservice
 
+[![Build Status](https://travis-ci.org/fr3dch3n/magellan-microservice.svg?branch=master)](https://travis-ci.org/fr3dch3n/magellan-microservice)
+
 This is a simple Microservice written in Elixir.
 The Magellan-Microservice provides a basic app-status and health page.
 It also provides the possibility to plug in a custom router (see Examples).
