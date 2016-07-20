@@ -31,7 +31,7 @@ defmodule MagellanMicroservice.Router do
     AppStatus.register_status_fun(:router, &status/0)
     Agent.start_link(fn ->
     %{}
-   end, name: __MODULE__)
+   end, name: :router)
     Logger.info("--> started the magellan-router")
    {:ok, self}
   end
@@ -43,13 +43,13 @@ defmodule MagellanMicroservice.Router do
   """
   @spec register_router(any) :: any()
   def register_router(x) do
-    Agent.update(__MODULE__, fn(_n) -> %{status: :ok,
+    Agent.update(:router, fn(_n) -> %{status: :ok,
     router: x} end)
   end
 
   @spec get_router() :: any()
   defp get_router() do
-    Agent.get(__MODULE__, fn(n) ->
+    Agent.get(:router, fn(n) ->
       n #validate and stuff, else :error
     end)
   end
