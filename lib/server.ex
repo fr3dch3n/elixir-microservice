@@ -41,9 +41,9 @@ defmodule MagellanMicroservice.Server do
   def start_link() do
     Logger.info "--> starting the magellan-server"
         port = specify_port()
-        IO.inspect port
-        IO.puts is_binary(port)
-        IO.puts is_integer(port)
+        Logger.info port
+        Logger.info is_binary(port)
+        Logger.info is_integer(port)
     AppStatus.register_status_fun(:server, &status/0)
 
     Plug.Adapters.Cowboy.http(Router, [], port: port)
