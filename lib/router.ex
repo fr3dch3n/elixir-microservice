@@ -32,6 +32,8 @@ defmodule MagellanMicroservice.Router do
     Agent.start_link(fn ->
     %{}
    end, name: __MODULE__)
+    Logger.info("--> started the magellan-router")
+   {:ok, self}
   end
 
   @doc """
