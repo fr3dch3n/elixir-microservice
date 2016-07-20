@@ -15,7 +15,8 @@ defmodule MagellanMicroservice.Server do
   @spec specify_port() :: integer
   def specify_port() do
     try do
-      Application.fetch_env!(:magellan_microservice, :port)
+      {port,_} = Integer.parse!(Application.get_env(:magellan_microservice, :port))
+      port
     rescue
       _ in ArgumentError ->
         Logger.warn("No port specified. Falling back to 8080.")
