@@ -9,16 +9,13 @@ defmodule MagellanMicroservice.Server do
   require Logger
 
   @doc """
-  This funtion tries to read the port, on which the server should run, from the config.
+  This funtion tries to read the port, on which the server should run, from the environment.
   As the log indicates the fallback is port 8080.
   """
   @spec specify_port() :: integer
   def specify_port() do
     try do
-        raw = System.get_env("PORT")
-        Logger.info raw
-      {port,_} = Integer.parse(raw)
-      Logger.info port
+      {port,_} = Integer.parse(System.get_env("PORT"))
       port
     rescue
       _ in ArgumentError ->
@@ -43,12 +40,7 @@ defmodule MagellanMicroservice.Server do
   @spec start_link :: any()
   def start_link() do
     Logger.info "--> starting the magellan-server"
-        port = specify_port()
-        Logger.info port
-        Logger.info is_binary(port)
-        Logger.info is_integer(port)
     AppStatus.register_status_fun(:server, &status/0)
-
-    Plug.Adapters.Cowboy.http(Router, [], port: port)
+    Plug.Adapters.Cowboy.http(Router, [], port: specify_port())
   end
 end
