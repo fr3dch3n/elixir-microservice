@@ -12,7 +12,7 @@ defmodule MagellanMicroservice.AppStatus do
   """
   @spec start_link :: any()
   def start_link() do
-    Logger.info "--> starting the magellan-app-status"
+    Logger.info "--> starting the app-status"
     Agent.start_link(fn ->
     %{}
    end, name: __MODULE__)
