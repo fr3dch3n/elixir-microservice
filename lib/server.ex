@@ -15,7 +15,10 @@ defmodule MagellanMicroservice.Server do
   @spec specify_port() :: integer
   def specify_port() do
     try do
-      {port,_} = Integer.parse(Application.get_env(:magellan_microservice, :port))
+        raw = System.get_env("PORT")
+        Logger.info raw
+      {port,_} = Integer.parse(raw)
+      Logger.info port
       port
     rescue
       _ in ArgumentError ->
