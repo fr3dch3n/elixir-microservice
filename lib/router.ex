@@ -1,7 +1,7 @@
 defmodule MagellanMicroservice.Router do
   @moduledoc """
   This module is used by the server to provide the default routes to status and health page.
-  Via the register_router function, one can use a custom router to expand the functionality.
+  Via the `register_router/0` function, one can add a custom router to expand the functionality.
   """
 
   use Plug.Router
@@ -13,17 +13,17 @@ defmodule MagellanMicroservice.Router do
   plug :dispatch
 
   @doc """
-  Ths function gets invoked by MagellanMicroservice.AppStatus.getStatus/0 and MagellanMicroservice.AppStatus.getHealth/0.
-  It returns the current status of the module.
-  """
-  @spec status :: map()
+   Ths function gets invoked by `MagellanMicroservice.AppStatus.get_status/0` and MagellanMicroservice.AppStatus.get_health/0.
+   It returns the current status of the module.
+   """
+   @spec status() :: %{atom => atom}
   def status() do
     %{status: :ok}
   end
 
   @doc """
   This function gets invoked by the start_link function.
-  It registers its status function and starts an Agent which can store a custom router.
+  It registers its status function `status/0` and starts an Agent `:router` which can store a custom router.
   """
   @spec init([]) :: any()
   def init([]) do
@@ -33,7 +33,7 @@ defmodule MagellanMicroservice.Router do
     %{}
    end, name: :router)
     Logger.info("--> started the magellan-router")
-   {:ok, self}
+   {:ok, self()}
   end
 
   @doc """
@@ -41,10 +41,11 @@ defmodule MagellanMicroservice.Router do
   All requests that don't match the configured status and health url will be send to the specified router.
   Refer to the examples in the Readme in order to use your own router with this microservice.
   """
-  @spec register_router(any) :: any()
+  @spec register_router(any) :: atom()
   def register_router(x) do
     Agent.update(:router, fn(_n) -> %{status: :ok,
     router: x} end)
+    :ok
   end
 
   @spec get_router() :: any()

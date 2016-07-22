@@ -1,6 +1,6 @@
-defmodule MagellanMicroservice.Core do
+defmodule MagellanMicroservice do
   @moduledoc """
-  This module contains the children of the Magellan-Microservice and is responsible for starting them up.
+  This module supervises the children of the MagellanMicroservice and is responsible for starting them up.
   """
 
   use Application
@@ -19,7 +19,7 @@ defmodule MagellanMicroservice.Core do
   end
 
   @doc """
-  The children MagellanMicroservice.AppStatus and MagellanMicroservice.Server are started up via its own start_link/1 function.
+  The children `MagellanMicroservice.AppStatus` and `MagellanMicroservice.Server` are started up via its own start_link/1 function.
   """
   @spec init([]) :: any()
   def init([]) do

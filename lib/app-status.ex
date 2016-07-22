@@ -20,16 +20,18 @@ defmodule MagellanMicroservice.AppStatus do
 
   @doc """
   Use this function to store a function under a name. The function will be invoked when the app-status or health are requested.
+  Return `:ok`.
   """
-  @spec register_status_fun(atom,   any) :: any()
+  @spec register_status_fun(atom,   any) :: atom()
   def register_status_fun(appName, fun) do
     Agent.update(__MODULE__, fn(n) -> Map.put(n, appName, fun) end)
+    :ok
   end
 
   @doc """
   Retrieve all results of the stored status functions.
   """
-  @spec get_status :: any()
+  @spec get_status :: map()
   def get_status() do
     Agent.get(__MODULE__, fn(n) ->
       %{
@@ -42,13 +44,13 @@ defmodule MagellanMicroservice.AppStatus do
   @doc """
   This function returns the App-Status.get_status result endcoded in json.
   """
-  @spec get_status_json :: any()
+  @spec get_status_json :: term()
   def get_status_json() do
     Poison.Encoder.encode(get_status(), [])
   end
 
   @doc """
-  A simple status represented by OK or ERROR.
+  Returns a simple status represented by OK or ERROR.
   """
   @spec get_health :: binary
   def get_health() do
