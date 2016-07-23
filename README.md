@@ -10,20 +10,18 @@ It also provides the possibility to plug in a custom router.
 
 Add the following line to your mix.exs deps:
 ```
-{:magellan_microservice, git: "https://github.com/fr3dch3n/magellan-microservice", branch: :master, app: false}
+{:magellan_microservice, "0.1.5"}
 ```
+
 
 ## Example
 
-To start the Microserice, start it as a supervisor next to your app.
+To start the Microserice, just add it to the applications in your mix.exs.
 ```
-def init([]) do
-  children = [
-    supervisor(MagellanMicroservice.Core, []),
-    supervisor(Example.Core, [])
-  ]
-  supervise(children, strategy: :one_for_one)
-end
+ def application do
+    [applications: [:magellan_microservice],
+    mod: {Your.App, []}]
+  end
 ```
 
 To use your custom plug-router, register it at start-up time.
@@ -31,10 +29,26 @@ To use your custom plug-router, register it at start-up time.
 MagellanMicroservice.Router.register_router(Example.Router)
 ```
 
+To add a status-function to the app-status, just pass it to: `register_status_fun`.
+```
+MagellanMicroservice.AppStatus.register_status_fun(:name, &your_status_fun/0)
+```
+
+
+## Configuration
+
 The following configuration has to be provided.
 ```
 config :magellan_microservice,
   status: "/status",
   health: "/health",
   port: 8080
+```
+
+
+## Test
+
+To run the test, you need to provide the `PORT` as an env-variable.
+```
+PORT=9121 mix test
 ```
