@@ -6,6 +6,8 @@ This is a simple Microservice written in Elixir.
 The Magellan-Microservice provides a basic app-status and health page.
 It also provides the possibility to plug in a custom router.
 
+**Documentation** can be found [here](https://hexdocs.pm/magellan_microservice/api-reference.html).
+
 ## Installation
 
 Add the following line to your mix.exs deps:
