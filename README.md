@@ -1,6 +1,8 @@
 # Magellan-Microservice
 
 [![Build Status](https://travis-ci.org/fr3dch3n/magellan-microservice.svg?branch=master)](https://travis-ci.org/fr3dch3n/magellan-microservice)
+[![Hex.pm](https://img.shields.io/badge/magellan--microservice-v0.1.5-orange.svg)](https://hex.pm/packages/magellan_microservice)
+
 
 This is a simple Microservice written in Elixir.
 The Magellan-Microservice provides a basic app-status and health page.
