@@ -43,5 +43,6 @@ defmodule MagellanMicroservice.Server do
     Logger.info "--> starting the magellan-server on port " <> Integer.to_string(port)
     AppStatus.register_status_fun(:server, &status/0)
     Plug.Adapters.Cowboy.http(Router, [], port: port)
+    Logger.info "<-- magellan-server started on port " <> Integer.to_string(port)
   end
 end
