@@ -1,4 +1,4 @@
-# Magellan-Microservice [![Hex.pm](https://img.shields.io/badge/magellan--microservice-v0.1.9-orange.svg)](https://hex.pm/packages/magellan_microservice)
+# Magellan-Microservice [![Hex.pm](https://img.shields.io/badge/magellan--microservice-v0.1.10-orange.svg)](https://hex.pm/packages/magellan_microservice)
 
 [![Build Status](https://travis-ci.org/fr3dch3n/magellan-microservice.svg?branch=master)](https://travis-ci.org/fr3dch3n/magellan-microservice)[![Inline docs](http://inch-ci.org/github/fr3dch3n/magellan-microservice.png)](http://inch-ci.org/github/fr3dch3n/magellan-microservice)
 
@@ -13,7 +13,7 @@ It also provides the possibility to plug in a custom router.
 
 Add the following line to your mix.exs deps:
 ```
-{:magellan_microservice, "0.1.9"}
+{:magellan_microservice, "0.1.10"}
 ```
 
 
