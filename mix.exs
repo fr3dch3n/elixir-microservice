@@ -3,8 +3,8 @@ defmodule MagellanMicroservice.Mixfile do
 
   def project do
     [app: :magellan_microservice,
-     version: "0.1.10",
-     elixir: "~> 1.2",
+     version: "0.1.11",
+     elixir: "~> 1.4.1",
      description: description(),
      package: package(),
      build_embedded: Mix.env == :prod,
