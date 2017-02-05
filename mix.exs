@@ -36,11 +36,10 @@ defmodule MagellanMicroservice.Mixfile do
 
   def deps do
     [
-      {:cowboy, "~> 1.0.0"},
-      {:plug, "~> 1.0"},
-      {:poison, "~> 2.0"},
-      {:ex_doc, "~> 0.12", only: :dev},
-      {:inch_ex, only: :dev}
+      {:cowboy, "~> 1.1"},
+      {:plug, "~> 1.3"},
+      {:poison, "~> 3.1"},
+      {:ex_doc, "~> 0.14.5", only: :dev},
     ]
   end
 end
