@@ -26,7 +26,11 @@ defmodule MagellanMicroservice.Mixfile do
 
   defp package do
     [
-       licenses: ["Apache 2.0"]
+       licenses: ["Apache 2.0"],
+       name: :magellan_microservice,
+       maintainers: ["Frederik Mars"],
+       links: %{"GitHub" => "https://github.com/fr3dch3n/magellan-microservice",
+                "Docs" => "https://hexdocs.pm/magellan_microservice/api-reference.html"}
     ]
   end
 
