@@ -40,6 +40,7 @@ defmodule MagellanMicroservice.Mixfile do
       {:plug, "~> 1.3"},
       {:poison, "~> 3.1"},
       {:ex_doc, "~> 0.14.5", only: :dev},
+      {:inch_ex, "~> 0.5", only: [:dev, :test]}
     ]
   end
 end

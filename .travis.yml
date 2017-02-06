@@ -3,3 +3,7 @@ elixir:
   - 1.4.1
 env:
  - PORT=9121
+
+after_script:
+ - MIX_ENV=docs mix deps.get
+ - MIX_ENV=docs mix inch.report
