@@ -3,7 +3,7 @@ defmodule MagellanMicroservice.Mixfile do
 
   def project do
     [app: :magellan_microservice,
-     version: "0.1.11",
+     version: "0.1.12",
      elixir: "~> 1.4.1",
      description: description(),
      package: package(),
@@ -37,10 +37,10 @@ defmodule MagellanMicroservice.Mixfile do
   def deps do
     [
       {:cowboy, "~> 1.1"},
-      {:plug, "~> 1.3"},
+      {:plug, "~> 1.4"},
       {:poison, "~> 3.1"},
-      {:ex_doc, "~> 0.14.5", only: :dev},
-      {:inch_ex, "~> 0.5", only: [:dev, :test]}
+      {:ex_doc, "~> 0.16.2", only: :dev},
+      {:inch_ex, "~> 0.5.6", only: [:dev, :test]}
     ]
   end
 end
