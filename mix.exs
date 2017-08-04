@@ -14,7 +14,7 @@ defmodule MagellanMicroservice.Mixfile do
 
   def application do
     [mod: {MagellanMicroservice, []},
-      applications: [:cowboy, :plug, :poison, :logger]]
+      applications: [:cowboy, :plug, :poison, :logger, :prometheus, :prometheus_ex, :prometheus_plugs]]
   end
 
   defp description do
@@ -39,6 +39,8 @@ defmodule MagellanMicroservice.Mixfile do
       {:cowboy, "~> 1.1"},
       {:plug, "~> 1.4"},
       {:poison, "~> 3.1"},
+      {:prometheus_plugs, "~> 1.1"},
+      {:prometheus_ex, "~> 1.3"},
       {:ex_doc, "~> 0.16.2", only: :dev},
       {:inch_ex, "~> 0.5.6", only: [:dev, :test]}
     ]

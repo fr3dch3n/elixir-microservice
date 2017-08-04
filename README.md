@@ -58,8 +58,10 @@ PORT=9121 mix test
 
 ## Next Steps
 
-* Basic metrics to prometheus
-* Multiple Router
+* ~~Basic metrics to prometheus~~
+* test metrics endpoint
 * Status and health determined by some strategy
 * useful status function in router
 * useful status function in server
+* Multiple Router
+* custom router works with instrumentation?

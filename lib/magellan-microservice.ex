@@ -8,6 +8,7 @@ defmodule MagellanMicroservice do
   alias MagellanMicroservice.AppStatus
   alias MagellanMicroservice.Server
   require Logger
+  require Prometheus.Registry
 
   @doc """
   Invoking Supervisor.start_link/2 will result in a call to init/1.
@@ -36,6 +37,8 @@ defmodule MagellanMicroservice do
   @spec start(any, any) :: any()
   def start(_type, _args) do
     Logger.info "--> starting the magellan-microservice"
+    MagellanMicroservice.PipelineInstrumenter.setup()
+    MagellanMicroservice.PrometheusExporter.setup()
     start_link()
   end
 end

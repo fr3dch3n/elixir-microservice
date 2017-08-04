@@ -1,4 +1,5 @@
-%{"connection": {:hex, :connection, "1.0.2"},
+%{"accept": {:hex, :accept, "0.3.3", "548ebb6fb2e8b0d170e75bb6123aea6ceecb0189bb1231eeadf52eac08384a97", [], [], "hexpm"},
+  "connection": {:hex, :connection, "1.0.2"},
   "cowboy": {:hex, :cowboy, "1.1.2", "61ac29ea970389a88eca5a65601460162d370a70018afe6f949a29dca91f3bb0", [:rebar3], [{:cowlib, "~> 1.0.2", [hex: :cowlib, repo: "hexpm", optional: false]}, {:ranch, "~> 1.3.2", [hex: :ranch, repo: "hexpm", optional: false]}], "hexpm"},
   "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [:make], []},
   "earmark": {:hex, :earmark, "1.2.3", "206eb2e2ac1a794aa5256f3982de7a76bf4579ff91cb28d0e17ea2c9491e46a4", [:mix], [], "hexpm"},
@@ -9,5 +10,8 @@
   "plug": {:hex, :plug, "1.4.3", "236d77ce7bf3e3a2668dc0d32a9b6f1f9b1f05361019946aae49874904be4aed", [:mix], [{:cowboy, "~> 1.0.1 or ~> 1.1", [hex: :cowboy, repo: "hexpm", optional: true]}, {:mime, "~> 1.0", [hex: :mime, repo: "hexpm", optional: false]}], "hexpm"},
   "poison": {:hex, :poison, "3.1.0", "d9eb636610e096f86f25d9a46f35a9facac35609a7591b3be3326e99a0484665", [:mix], []},
   "poolboy": {:hex, :poolboy, "1.5.1"},
+  "prometheus": {:hex, :prometheus, "3.3.2", "5ee678fdf835ede650a8b03819961859f2c403ac12dac52e60ee4b45f4e3b6db", [], [], "hexpm"},
+  "prometheus_ex": {:hex, :prometheus_ex, "1.3.0", "eddc8cc9e384fcf20c4d42f71e539b49705bb44f95f5e1b19b967fad92c63526", [], [{:prometheus, "~> 3.3", [hex: :prometheus, repo: "hexpm", optional: false]}], "hexpm"},
+  "prometheus_plugs": {:hex, :prometheus_plugs, "1.1.3", "53bb8cb31121e4491928ed56c0346a7a7571c830e9abdcd3205f09c65c0256c7", [], [{:accept, "~> 0.1", [hex: :accept, repo: "hexpm", optional: false]}, {:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: false]}, {:prometheus_ex, "~> 1.1", [hex: :prometheus_ex, repo: "hexpm", optional: false]}, {:prometheus_process_collector, "~> 1.0.0", [hex: :prometheus_process_collector, repo: "hexpm", optional: true]}], "hexpm"},
   "ranch": {:hex, :ranch, "1.3.2", "e4965a144dc9fbe70e5c077c65e73c57165416a901bd02ea899cfd95aa890986", [:rebar3], [], "hexpm"},
   "redix": {:hex, :redix, "0.3.5"}}

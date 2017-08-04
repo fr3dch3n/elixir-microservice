@@ -4,11 +4,13 @@ defmodule MagellanMicroservice.Router do
   Via the `register_router/0` function, one can add a custom router to expand the functionality.
   """
 
-  use Plug.Router
   alias MagellanMicroservice.AppStatus
   require EEx
   require Logger
 
+  use Plug.Router
+  plug MagellanMicroservice.PrometheusExporter     # makes the /metrics URL happen
+  plug MagellanMicroservice.PipelineInstrumenter
   plug :match
   plug :dispatch
 
