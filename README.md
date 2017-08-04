@@ -55,3 +55,11 @@ To run the test, you need to provide the `PORT` as an env-variable.
 ```
 PORT=9121 mix test
 ```
+
+## Next Steps
+
+* Basic metrics to prometheus
+* Multiple Router
+* Status and health determined by some strategy
+* useful status function in router
+* useful status function in server

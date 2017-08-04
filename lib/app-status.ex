@@ -50,7 +50,7 @@ defmodule MagellanMicroservice.AppStatus do
   end
 
   @doc """
-  Returns a simple status represented by OK or ERROR.
+  Returns a simple status represented by OK. Still hacked.
   """
   @spec get_health :: binary
   def get_health() do
