@@ -3,7 +3,7 @@ defmodule MagellanMicroservice.Mixfile do
 
   def project do
     [app: :magellan_microservice,
-     version: "0.2.0",
+     version: "0.3.0",
      elixir: "~> 1.5.2",
      description: description(),
      package: package(),
